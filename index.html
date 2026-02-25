@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>VSL Secreta Africana · Duração de até 40min</title>
+  <style>
+    /* RESET E BASE – mobile first, conversão */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: white;
+      line-height: 1.4;
+    }
+
+    .container-padding {
+      padding: 0 16px;
+    }
+
+    /* ===== BARRA DE URGÊNCIA FIXA VERMELHA ===== */
+    .top-urgency {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #ff0000;
+      color: white;
+      font-weight: 800;
+      text-align: center;
+      padding: 12px 10px;
+      font-size: 1rem;
+      letter-spacing: 0.3px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      z-index: 1000;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 5px 8px;
+      border-bottom: 2px solid #cc0000;
+    }
+
+    .top-urgency span {
+      background: rgba(0,0,0,0.2);
+      padding: 4px 10px;
+      border-radius: 40px;
+      font-family: 'Courier New', monospace;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+    }
+
+    /* ===== HEADLINE CAIXA BRANCA BORDA VERMELHA ===== */
+    .headline-box {
+      background: white;
+      border: 6px solid #ff0000;
+      margin: 20px 0 16px 0;
+      padding: 18px 10px;
+      text-align: center;
+      box-shadow: 0 8px 0 #b30000;
+    }
+
+    .headline-box h1 {
+      font-size: 1.8rem;
+      font-weight: 900;
+      line-height: 1.2;
+      text-transform: uppercase;
+      color: #111;
+      word-break: break-word;
+    }
+
+    /* ===== ÁREA DE VÍDEO (fundo vermelho AGORA MAIOR QUE O BRANCO) ===== */
+    .video-section {
+      background-color: #ff0000;
+      padding: 25px 20px;  /* AUMENTADO: borda vermelha maior em volta */
+      border-radius: 0;
+      margin: 16px 0 5px 0;
+    }
+
+    .video-container {
+      background-color: white;
+      max-width: 100%;
+      margin: 0 auto;
+      border-radius: 0;
+      box-shadow: 0 6px 0 #b30000;
+      aspect-ratio: 16 / 9;
+      width: 90%; /* REDUZIDO: vídeo menor dentro do fundo vermelho */
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-container video {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      object-fit: contain;
+      background: black;
+    }
+
+    /* BOTÃO ADERIR JÁ - REDUZIDO */
+    .btn-aderir-wrapper {
+      margin: 8px 0 5px 0;
+      padding: 0 20px;  /* MAIOR PADDING para alinhar com a borda vermelha */
+    }
+    
+    .btn-aderir {
+      display: block;
+      width: 90%; /* REDUZIDO: botão menor e centralizado */
+      margin: 0 auto; /* centraliza */
+      background-color: #ff0000;
+      border: none;
+      border-bottom: 5px solid #b30000;
+      color: white;
+      font-weight: 900;
+      font-size: 1.8rem; /* REDUZIDO */
+      text-transform: uppercase;
+      text-align: center;
+      padding: 16px 10px; /* REDUZIDO */
+      text-decoration: none;
+      letter-spacing: 2px;
+      transition: all 0.1s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn-aderir:active {
+      transform: translateY(3px);
+      border-bottom-width: 3px;
+    }
+
+    /* ===== PROVA SOCIAL - CORRIGIDA (agora só uma bolinha) ===== */
+    .live-counter {
+      background: white;
+      padding: 12px 16px;
+      margin: 10px 0 0 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .pulsing-dot {
+      width: 18px;
+      height: 18px;
+      background-color: #ff0000;
+      border-radius: 50%;
+      box-shadow: 0 0 0 rgba(255, 0, 0, 0.4);
+      animation: pulse 1.4s infinite;
+      display: inline-block;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.6); }
+      70% { box-shadow: 0 0 0 12px rgba(255, 0, 0, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+    }
+
+    .live-counter .texto-prova {
+      color: #ff0000;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+
+    /* ===== COMENTÁRIOS ESTILO FACEBOOK ===== */
+    .fb-comments-section {
+      background: white;
+      margin: 30px 0 40px 0;
+      border-top: 2px solid #ddd;
+      padding-top: 20px;
+    }
+
+    .fb-title {
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      border-bottom: 3px solid #ff0000;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    .comment-card {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      background: #fff;
+      padding: 8px 0;
+      border-bottom: 1px solid #ececec;
+    }
+
+    .comment-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: #2c2c2c;
+      background-size: cover;
+      flex-shrink: 0;
+      border: 2px solid #ff0000;
+    }
+
+    /* avatares ilustrativos */
+    .avatar-leo { background: #c44b4b; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%23aa2b2b"><circle cx="50" cy="40" r="20" fill="%23ddd"/><circle cx="50" cy="90" r="28" fill="%23ccc"/></svg>'); }
+    .avatar-domingos { background: #2d6e46; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%231e4d33"><circle cx="50" cy="40" r="20" fill="%23bbb"/><circle cx="50" cy="90" r="28" fill="%23aaa"/></svg>'); }
+    .avatar-mateus { background: #a65827; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%23853e1a"><circle cx="50" cy="40" r="20" fill="%23ccc"/><circle cx="50" cy="90" r="28" fill="%23b0b0b0"/></svg>'); }
+    .avatar-joao { background: #32658c; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%231d4563"><circle cx="50" cy="40" r="20" fill="%23d9d9d9"/><circle cx="50" cy="90" r="28" fill="%23bfbfbf"/></svg>'); }
+
+    .comment-content {
+      flex: 1;
+    }
+
+    .comment-name {
+      font-weight: 700;
+      color: #ff0000;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .comment-text {
+      font-size: 1rem;
+      color: #1c1c1c;
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+
+    .comment-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      font-size: 0.9rem;
+      color: #777;
+      font-weight: 500;
+      margin-top: 6px;
+      border-top: 1px dotted #ccc;
+      padding-top: 8px;
+    }
+
+    .comment-actions span {
+      cursor: default;
+    }
+
+    .fb-footer-note {
+      margin-top: 30px;
+      background: #f5f5f5;
+      border: 1px solid #dadada;
+      padding: 14px 18px;
+      text-align: center;
+      font-weight: 600;
+      color: #3b3b3b;
+      font-size: 1rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 2px 0 #ccc;
+    }
+
+    .fb-footer-note i {
+      color: #4267B2;
+      font-style: normal;
+      font-weight: 900;
+      font-size: 1.3rem;
+    }
+
+    .extra-bottom {
+      height: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1️⃣ BARRA DE URGÊNCIA TOPO VERMELHA com contador regressivo real -->
+  <div class="top-urgency" id="urgencyBar">
+    ⚠️ Atenção: Esta página será retirada do ar em <span id="countdownTimer">00:09:47</span>
+  </div>
+
+  <!-- Conteúdo principal com padding lateral -->
+  <div class="container-padding">
+
+    <!-- 2️⃣ HEADLINE PRINCIPAL -->
+    <div class="headline-box">
+      <h1>Descubra como homens africanos conseguem durar até 40 minutos na cama!</h1>
+    </div>
+
+    <!-- 3️⃣ ÁREA DO VÍDEO - BORDA VERMELHA MAIOR, VÍDEO MENOR -->
+    <div class="video-section">
+      <div class="video-container">
+        <!-- VÍDEO MP4 - Substitua "vdr.mp4" pelo nome do seu arquivo -->
+        <video controls autoplay loop>
+          <source src="vdr.mp4" type="video/mp4">
+          Seu navegador não suporta vídeo HTML5. Aqui está um <a href="vdr.mp4">link para o vídeo</a>
+        </video>
+        <!-- comentário oculto com caractere solicitado: � -->
+        <!-- � -->
+      </div>
+    </div>
+
+    <!-- BOTÃO ADERIR JÁ - REDUZIDO E CENTRALIZADO -->
+    <div class="btn-aderir-wrapper">
+      <a href="#" class="btn-aderir" id="btnAderir" target="_blank" rel="noopener">ADERIR JÁ</a>
+    </div>
+
+    <!-- 4️⃣ PROVA SOCIAL - CORRIGIDA (agora apenas uma bolinha) -->
+    <div class="live-counter">
+      <div class="pulsing-dot"></div>
+      <span class="texto-prova">131 homens estão assistindo agora...</span>
+    </div>
+
+    <!-- 5️⃣ COMENTÁRIOS ESTILO FACEBOOK -->
+    <div class="fb-comments-section">
+      <div class="fb-title">4 Comentários</div>
+
+      <!-- Leo -->
+      <div class="comment-card">
+        <div class="comment-avatar avatar-leo"></div>
+        <div class="comment-content">
+          <div class="comment-name">Leo Macuacua</div>
+          <div class="comment-text">"Eu não aguentava nem 2 minutos, mas depois de usar esse produto por 5 dias agora duro 35 minutos. 😎"</div>
+          <div class="comment-actions"><span>Responder</span> · <span>Curtir</span> · <span>Seguir</span> · <span>10 min</span></div>
+        </div>
+      </div>
+
+      <!-- Domingos -->
+      <div class="comment-card">
+        <div class="comment-avatar avatar-domingos"></div>
+        <div class="comment-content">
+          <div class="comment-name">Domingos dos Santos</div>
+          <div class="comment-text">"Isso salvou meu casamento, sem exagero. Recomendo a todos 🖤🖤"</div>
+          <div class="comment-actions"><span>Responder</span> · <span>Curtir</span> · <span>Seguir</span> · <span>35 min</span></div>
+        </div>
+      </div>
+
+      <!-- Mateus -->
+      <div class="comment-card">
+        <div class="comment-avatar avatar-mateus"></div>
+        <div class="comment-content">
+          <div class="comment-name">Mateus Rosário</div>
+          <div class="comment-text">"Quem ainda tá duvidando é porque gosta de sofrer, eu já estou usando há 1 semana"</div>
+          <div class="comment-actions"><span>Responder</span> · <span>Curtir</span> · <span>Seguir</span> · <span>1 h</span></div>
+        </div>
+      </div>
+
+      <!-- João -->
+      <div class="comment-card">
+        <div class="comment-avatar avatar-joao"></div>
+        <div class="comment-content">
+          <div class="comment-name">João Cumbane</div>
+          <div class="comment-text">"Melhor produto que já comprei, vejam até o final para entender como funciona"</div>
+          <div class="comment-actions"><span>Responder</span> · <span>Curtir</span> · <span>Seguir</span> · <span>56 min</span></div>
+        </div>
+      </div>
+
+      <!-- Plug-in social Facebook -->
+      <div class="fb-footer-note">
+        <i>f</i> Plug-in social do Facebook · 4 comentários · 17 partilhas
+      </div>
+    </div>
+  </div> <!-- fim container-padding -->
+
+  <div class="extra-bottom"></div>
+
+  <!-- CONFIGURAÇÕES DO CONTADOR E LINK DO BOTÃO -->
+  <script>
+    (function() {
+      // CONTADOR REGRESSIVO (00:09:47)
+      const COUNTDOWN_SECONDS = 587; // 9min47s
+      
+      function formatTime(totalSeconds) {
+        if (totalSeconds < 0) totalSeconds = 0;
+        const hrs = Math.floor(totalSeconds / 3600);
+        const mins = Math.floor((totalSeconds % 3600) / 60);
+        const secs = totalSeconds % 60;
+        return `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+      }
+
+      let targetTime;
+      const savedTarget = localStorage.getItem('urgencyTarget');
+
+      if (savedTarget) {
+        targetTime = parseInt(savedTarget, 10);
+        const now = Date.now();
+        if (isNaN(targetTime) || targetTime < now - 600000) {
+          targetTime = now + COUNTDOWN_SECONDS * 1000;
+          localStorage.setItem('urgencyTarget', targetTime);
+        }
+      } else {
+        targetTime = Date.now() + COUNTDOWN_SECONDS * 1000;
+        localStorage.setItem('urgencyTarget', targetTime);
+      }
+
+      if (Date.now() >= targetTime) {
+        targetTime = Date.now() + COUNTDOWN_SECONDS * 1000;
+        localStorage.setItem('urgencyTarget', targetTime);
+      }
+
+      function updateCounter() {
+        const now = Date.now();
+        const diffSeconds = Math.max(0, Math.floor((targetTime - now) / 1000));
+        const timerElement = document.getElementById('countdownTimer');
+        if (timerElement) timerElement.innerText = formatTime(diffSeconds);
+      }
+
+      updateCounter();
+      setInterval(updateCounter, 1000);
+
+      // LINK DO BOTÃO "ADERIR JÁ" - ALTERE AQUI
+      const btn = document.getElementById('btnAderir');
+      if (btn) {
+        // COLOQUE SEU LINK AQUI (ex: https://seusite.com/checkout)
+        btn.setAttribute('href', 'https://fristpays.site/checkout/76b96ff4-aa6b-4f46-850b-4fd3f6d14bfc');
+      }
+    })();
+  </script>
+
+  <!-- Comentário extra no código fonte -->
+  <!-- � -->
+</body>
+</html>
