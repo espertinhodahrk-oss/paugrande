@@ -3,422 +3,609 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>VSL Secreta Africana · Duração de até 40min</title>
+  <title>Segredo Africano · AO VIVO</title>
   <style>
-    /* RESET E BASE – mobile first, conversão */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
     }
 
     body {
-      background-color: white;
-      line-height: 1.4;
+      background: #f0f2f5;
     }
 
-    .container-padding {
-      padding: 0 16px;
+    /* ambiente de rede social/real */
+    .fb-mood-bg {
+      background: #f0f2f5;
+      min-height: 100vh;
+      padding-bottom: 30px;
     }
 
-    /* ===== BARRA DE URGÊNCIA FIXA VERMELHA ===== */
-    .top-urgency {
+    /* barra azul como facebook */
+    .fake-header {
+      background: #1877f2;
+      color: white;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 1.4rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       position: sticky;
       top: 0;
-      left: 0;
-      width: 100%;
-      background-color: #ff0000;
-      color: white;
-      font-weight: 800;
-      text-align: center;
-      padding: 12px 10px;
-      font-size: 1rem;
-      letter-spacing: 0.3px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-      z-index: 1000;
+      z-index: 999;
+    }
+
+    .fake-header .logo {
+      background: white;
+      color: #1877f2;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      gap: 5px 8px;
-      border-bottom: 2px solid #cc0000;
-    }
-
-    .top-urgency span {
-      background: rgba(0,0,0,0.2);
-      padding: 4px 10px;
-      border-radius: 40px;
-      font-family: 'Courier New', monospace;
-      font-size: 1.2rem;
-      letter-spacing: 2px;
-    }
-
-    /* ===== HEADLINE CAIXA BRANCA BORDA VERMELHA ===== */
-    .headline-box {
-      background: white;
-      border: 6px solid #ff0000;
-      margin: 20px 0 16px 0;
-      padding: 18px 10px;
-      text-align: center;
-      box-shadow: 0 8px 0 #b30000;
-    }
-
-    .headline-box h1 {
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: 900;
-      line-height: 1.2;
-      text-transform: uppercase;
-      color: #111;
-      word-break: break-word;
     }
 
-    /* ===== ÁREA DE VÍDEO (fundo vermelho AGORA MAIOR QUE O BRANCO) ===== */
-    .video-section {
-      background-color: #ff0000;
-      padding: 25px 20px;  /* AUMENTADO: borda vermelha maior em volta */
-      border-radius: 0;
-      margin: 16px 0 5px 0;
+    /* contador real de visualizações estilo live */
+    .live-now-bar {
+      background: #ffffff;
+      border-bottom: 1px solid #ddd;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px 20px;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.02);
     }
 
-    .video-container {
-      background-color: white;
-      max-width: 100%;
-      margin: 0 auto;
-      border-radius: 0;
-      box-shadow: 0 6px 0 #b30000;
-      aspect-ratio: 16 / 9;
-      width: 90%; /* REDUZIDO: vídeo menor dentro do fundo vermelho */
-      position: relative;
-      overflow: hidden;
-    }
-
-    .video-container video {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      object-fit: contain;
-      background: black;
-    }
-
-    /* BOTÃO ADERIR JÁ - REDUZIDO */
-    .btn-aderir-wrapper {
-      margin: 8px 0 5px 0;
-      padding: 0 20px;  /* MAIOR PADDING para alinhar com a borda vermelha */
-    }
-    
-    .btn-aderir {
-      display: block;
-      width: 90%; /* REDUZIDO: botão menor e centralizado */
-      margin: 0 auto; /* centraliza */
-      background-color: #ff0000;
-      border: none;
-      border-bottom: 5px solid #b30000;
+    .live-badge {
+      background: #e41e3f;
       color: white;
-      font-weight: 900;
-      font-size: 1.8rem; /* REDUZIDO */
-      text-transform: uppercase;
-      text-align: center;
-      padding: 16px 10px; /* REDUZIDO */
-      text-decoration: none;
-      letter-spacing: 2px;
-      transition: all 0.1s ease;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      -webkit-tap-highlight-color: transparent;
+      font-weight: 800;
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
-    .btn-aderir:active {
-      transform: translateY(3px);
-      border-bottom-width: 3px;
-    }
-
-    /* ===== PROVA SOCIAL - CORRIGIDA (agora só uma bolinha) ===== */
-    .live-counter {
-      background: white;
-      padding: 12px 16px;
-      margin: 10px 0 0 0;
+    .viewer-count {
+      background: #eef2f5;
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-weight: 600;
+      color: #1e1e1e;
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 1.3rem;
-      font-weight: 700;
     }
 
-    .pulsing-dot {
-      width: 18px;
-      height: 18px;
-      background-color: #ff0000;
+    .pulse-dot-live {
+      width: 12px;
+      height: 12px;
+      background: #31a24c;
       border-radius: 50%;
-      box-shadow: 0 0 0 rgba(255, 0, 0, 0.4);
-      animation: pulse 1.4s infinite;
-      display: inline-block;
+      box-shadow: 0 0 0 rgba(49, 162, 76, 0.6);
+      animation: pulse-green 1.8s infinite;
     }
 
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.6); }
-      70% { box-shadow: 0 0 0 12px rgba(255, 0, 0, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+    @keyframes pulse-green {
+      0% { box-shadow: 0 0 0 0 rgba(49, 162, 76, 0.6); }
+      70% { box-shadow: 0 0 0 16px rgba(49, 162, 76, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(49, 162, 76, 0); }
     }
 
-    .live-counter .texto-prova {
-      color: #ff0000;
-      font-weight: 800;
-      letter-spacing: 0.3px;
-    }
-
-    /* ===== COMENTÁRIOS ESTILO FACEBOOK ===== */
-    .fb-comments-section {
-      background: white;
-      margin: 30px 0 40px 0;
-      border-top: 2px solid #ddd;
-      padding-top: 20px;
-    }
-
-    .fb-title {
+    .urgent-timer {
+      margin-left: auto;
+      background: #fee8e8;
+      border-radius: 40px;
+      padding: 6px 18px;
       font-weight: 700;
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      border-bottom: 3px solid #ff0000;
-      display: inline-block;
-      padding-bottom: 5px;
+      color: #b71c1c;
+      border: 1px solid #ffb3b3;
     }
 
-    .comment-card {
+    /* container do conteudo */
+    .content-card {
+      max-width: 720px;
+      margin: 16px auto 0;
+      background: white;
+      border-radius: 24px 24px 0 0;
+      box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+      overflow: hidden;
+      border: 1px solid #e0e0e0;
+    }
+
+    .inner-pad {
+      padding: 20px 18px 10px;
+    }
+
+    .headline-real {
+      font-size: 2rem;
+      font-weight: 900;
+      line-height: 1.2;
+      color: #1c1e21;
+      margin-bottom: 15px;
+      border-left: 8px solid #e41e3f;
+      padding-left: 18px;
+      background: linear-gradient(to right, #fcf4f4, transparent);
+    }
+
+    .video-wrapper-real {
+      background: #0b0f14;
+      border-radius: 20px;
+      padding: 18px 12px;
+      margin: 10px 0 16px;
+      border: 2px solid #2e89ff;
+      box-shadow: 0 12px 25px -8px #001a66;
+    }
+
+    .video-container-real {
+      background: black;
+      border-radius: 14px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      width: 92%;
+      margin: 0 auto;
+      box-shadow: 0 0 0 3px #1877f2, 0 20px 30px -10px black;
+    }
+
+    .video-container-real video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      background: #0f0f0f;
+    }
+
+    /* botão realista estilo compra */
+    .btn-real {
+      display: block;
+      background: #2e89ff;
+      background: linear-gradient(145deg, #1877f2, #1459b3);
+      border: none;
+      border-radius: 100px;
+      color: white;
+      font-weight: 900;
+      font-size: 2.2rem;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 18px 12px;
+      text-decoration: none;
+      letter-spacing: 2.5px;
+      box-shadow: 0 15px 25px -8px #0a2e5e, 0 4px 0 0 #0c3b7a inset;
+      width: 92%;
+      margin: 12px auto 10px;
+      transition: all 0.06s;
+      border-bottom: 6px solid #0b3560;
+    }
+
+    .btn-real:active {
+      transform: translateY(5px);
+      border-bottom-width: 2px;
+      box-shadow: 0 6px 12px -4px #0f3570;
+    }
+
+    /* área de comentários com aparência dinâmica */
+    .comments-live-section {
+      background: #f8fafd;
+      margin-top: 30px;
+      border-top: 8px solid #e41e3f;
+      padding: 22px 16px 30px;
+    }
+
+    .comments-header {
       display: flex;
-      gap: 12px;
-      margin-bottom: 24px;
-      background: #fff;
-      padding: 8px 0;
-      border-bottom: 1px solid #ececec;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 25px;
+    }
+
+    .comments-header h3 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #1c1e21;
+    }
+
+    .comments-header span {
+      background: #e4e6eb;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-weight: 600;
+      color: #4b4f56;
+      font-size: 1rem;
+    }
+
+    .comment-stream {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* cada comentário com aspecto facebook/messenger */
+    .comment-item {
+      display: flex;
+      gap: 14px;
+      background: white;
+      padding: 16px 16px 12px 16px;
+      border-radius: 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+      border: 1px solid #e9eef2;
+      transition: 0.15s;
+    }
+
+    .comment-item:hover {
+      border-color: #b0c4de;
     }
 
     .comment-avatar {
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
-      background-color: #2c2c2c;
-      background-size: cover;
-      flex-shrink: 0;
-      border: 2px solid #ff0000;
-    }
-
-    /* avatares ilustrativos */
-    .avatar-leo { background: #c44b4b; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%23aa2b2b"><circle cx="50" cy="40" r="20" fill="%23ddd"/><circle cx="50" cy="90" r="28" fill="%23ccc"/></svg>'); }
-    .avatar-domingos { background: #2d6e46; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%231e4d33"><circle cx="50" cy="40" r="20" fill="%23bbb"/><circle cx="50" cy="90" r="28" fill="%23aaa"/></svg>'); }
-    .avatar-mateus { background: #a65827; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%23853e1a"><circle cx="50" cy="40" r="20" fill="%23ccc"/><circle cx="50" cy="90" r="28" fill="%23b0b0b0"/></svg>'); }
-    .avatar-joao { background: #32658c; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%231d4563"><circle cx="50" cy="40" r="20" fill="%23d9d9d9"/><circle cx="50" cy="90" r="28" fill="%23bfbfbf"/></svg>'); }
-
-    .comment-content {
-      flex: 1;
-    }
-
-    .comment-name {
-      font-weight: 700;
-      color: #ff0000;
-      font-size: 1.1rem;
-      margin-bottom: 4px;
-    }
-
-    .comment-text {
-      font-size: 1rem;
-      color: #1c1c1c;
-      margin-bottom: 8px;
-      line-height: 1.35;
-    }
-
-    .comment-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      font-size: 0.9rem;
-      color: #777;
-      font-weight: 500;
-      margin-top: 6px;
-      border-top: 1px dotted #ccc;
-      padding-top: 8px;
-    }
-
-    .comment-actions span {
-      cursor: default;
-    }
-
-    .fb-footer-note {
-      margin-top: 30px;
-      background: #f5f5f5;
-      border: 1px solid #dadada;
-      padding: 14px 18px;
-      text-align: center;
-      font-weight: 600;
-      color: #3b3b3b;
-      font-size: 1rem;
-      border-radius: 8px;
+      background: #ccd;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      box-shadow: 0 2px 0 #ccc;
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: white;
+      text-transform: uppercase;
+      flex-shrink: 0;
+      border: 2px solid #1877f2;
     }
 
-    .fb-footer-note i {
-      color: #4267B2;
-      font-style: normal;
+    .avatar-1 { background: #c0392b; } .avatar-2 { background: #2c3e50; } .avatar-3 { background: #27ae60; }
+    .avatar-4 { background: #f39c12; } .avatar-5 { background: #8e44ad; } .avatar-6 { background: #16a085; }
+    .avatar-7 { background: #d35400; } .avatar-8 { background: #2980b9; } .avatar-9 { background: #7f8c8d; }
+    .avatar-10 { background: #c0392b; } .avatar-11 { background: #2c3e50; }
+
+    .comment-body {
+      flex: 1;
+    }
+
+    .comment-meta {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 5px;
+    }
+
+    .comment-author {
+      font-weight: 800;
+      color: #1e1e2f;
+      font-size: 1.15rem;
+    }
+
+    .comment-time {
+      font-size: 0.85rem;
+      color: #65676b;
+      background: #f0f2f5;
+      padding: 2px 10px;
+      border-radius: 30px;
+    }
+
+    .comment-text {
+      font-size: 1.1rem;
+      line-height: 1.4;
+      color: #050505;
+      margin: 8px 0 10px;
+      background: #f2f6fc;
+      padding: 10px 14px;
+      border-radius: 18px;
+      border-left: 5px solid #1877f2;
+    }
+
+    .comment-actions-live {
+      display: flex;
+      gap: 25px;
+      color: #65676b;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding-left: 5px;
+      border-top: 1px solid #eef2f5;
+      padding-top: 10px;
+    }
+
+    .comment-actions-live span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: default;
+    }
+
+    /* reações */
+    .like-count {
+      color: #1877f2;
+    }
+
+    .fb-footer-real {
+      background: white;
+      margin-top: 30px;
+      padding: 18px 20px;
+      border-radius: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid #ced9e8;
+      font-weight: 600;
+      color: #1d2b42;
+      font-size: 1rem;
+      box-shadow: 0 2px 10px #e3eaf2;
+    }
+
+    .fb-icon-small {
+      background: #1877f2;
+      color: white;
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
       font-weight: 900;
-      font-size: 1.3rem;
     }
 
-    .extra-bottom {
-      height: 30px;
+    /* indicador de novos comentarios */
+    .new-comment-alert {
+      background: #e7f3ff;
+      border-left: 6px solid #1877f2;
+      padding: 14px 20px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #004d99;
+      font-weight: 600;
+    }
+
+    /* oculto caractere */
+    .hidden-char {
+      display: none;
     }
   </style>
 </head>
 <body>
-
-  <!-- 1️⃣ BARRA DE URGÊNCIA TOPO VERMELHA com contador regressivo real -->
-  <div class="top-urgency" id="urgencyBar">
-    ⚠️ Atenção: Esta página será retirada do ar em <span id="countdownTimer">00:09:47</span>
-  </div>
-
-  <!-- Conteúdo principal com padding lateral -->
-  <div class="container-padding">
-
-    <!-- 2️⃣ HEADLINE PRINCIPAL -->
-    <div class="headline-box">
-      <h1>Descubra como homens africanos conseguem durar até 40 minutos na cama!</h1>
+  <!-- ambiente de rede social -->
+  <div class="fb-mood-bg">
+    <!-- fake header facebook -->
+    <div class="fake-header">
+      <div class="logo">f</div>
+      <div>Grupo Secreto · Homens Reais</div>
     </div>
 
-    <!-- 3️⃣ ÁREA DO VÍDEO - BORDA VERMELHA MAIOR, VÍDEO MENOR -->
-    <div class="video-section">
-      <div class="video-container">
-        <!-- VÍDEO MP4 - Substitua "vdr.mp4" pelo nome do seu arquivo -->
-        <video controls autoplay loop>
-          <source src="vdr.mp4" type="video/mp4">
-          Seu navegador não suporta vídeo HTML5. Aqui está um <a href="vdr.mp4">link para o vídeo</a>
-        </video>
-        <!-- comentário oculto com caractere solicitado: � -->
-        <!-- � -->
+    <!-- barra de estatísticas ao vivo -->
+    <div class="live-now-bar">
+      <div class="live-badge"><span>🔴 AO VIVO</span></div>
+      <div class="viewer-count">
+        <div class="pulse-dot-live"></div>
+        <span><strong>1.283</strong> homens online</span>
+      </div>
+      <div class="urgent-timer" id="timerDisplay">
+        ⏳ encerra em <span id="countdownTimerReal">09:47</span>
       </div>
     </div>
 
-    <!-- BOTÃO ADERIR JÁ - REDUZIDO E CENTRALIZADO -->
-    <div class="btn-aderir-wrapper">
-      <a href="#" class="btn-aderir" id="btnAderir" target="_blank" rel="noopener">ADERIR JÁ</a>
-    </div>
-
-    <!-- 4️⃣ PROVA SOCIAL - CORRIGIDA (agora apenas uma bolinha) -->
-    <div class="live-counter">
-      <div class="pulsing-dot"></div>
-      <span class="texto-prova">131 homens estão assistindo agora...</span>
-    </div>
-
-    <!-- 5️⃣ COMENTÁRIOS ESTILO FACEBOOK -->
-    <div class="fb-comments-section">
-      <div class="fb-title">4 Comentários</div>
-
-      <!-- Leo -->
-      <div class="comment-card">
-        <div class="comment-avatar avatar-leo"></div>
-        <div class="comment-content">
-          <div class="comment-name">Leo Macuacua</div>
-          <div class="comment-text">"Eu não aguentava nem 2 minutos, mas depois de usar esse produto por 5 dias agora duro 35 minutos. 😎"</div>
-          <div class="comment-actions"><span>Responder</span> · <span>Curtir</span> · <span>Seguir</span> · <span>10 min</span></div>
+    <!-- CARD PRINCIPAL (conteúdo) -->
+    <div class="content-card">
+      <div class="inner-pad">
+        <!-- Headline -->
+        <div class="headline-real">
+          Descubra como homens africanos duram até 40 minutos!
         </div>
-      </div>
 
-      <!-- Domingos -->
-      <div class="comment-card">
-        <div class="comment-avatar avatar-domingos"></div>
-        <div class="comment-content">
-          <div class="comment-name">Domingos dos Santos</div>
-          <div class="comment-text">"Isso salvou meu casamento, sem exagero. Recomendo a todos 🖤🖤"</div>
-          <div class="comment-actions"><span>Responder</span> · <span>Curtir</span> · <span>Seguir</span> · <span>35 min</span></div>
+        <!-- Vídeo com borda azul -->
+        <div class="video-wrapper-real">
+          <div class="video-container-real">
+            <video controls autoplay loop playsinline>
+              <source src="vdr.mp4" type="video/mp4">
+            </video>
+            <!-- � caractere preservado -->
+          </div>
         </div>
-      </div>
 
-      <!-- Mateus -->
-      <div class="comment-card">
-        <div class="comment-avatar avatar-mateus"></div>
-        <div class="comment-content">
-          <div class="comment-name">Mateus Rosário</div>
-          <div class="comment-text">"Quem ainda tá duvidando é porque gosta de sofrer, eu já estou usando há 1 semana"</div>
-          <div class="comment-actions"><span>Responder</span> · <span>Curtir</span> · <span>Seguir</span> · <span>1 h</span></div>
+        <!-- Botão de conversão (link real) -->
+        <a href="#" class="btn-real" id="btnAderirReal" target="_blank">ADERIR AGORA</a>
+
+        <!-- mini prova extra: pessoas comprando -->
+        <div style="display: flex; justify-content: center; margin: 6px 0 20px; color: #2c3e50; font-weight: 500; gap: 5px;">
+          ⚡ <span>17 pessoas compraram nos últimos 15 minutos</span>
         </div>
-      </div>
+      </div> <!-- fim inner pad -->
 
-      <!-- João -->
-      <div class="comment-card">
-        <div class="comment-avatar avatar-joao"></div>
-        <div class="comment-content">
-          <div class="comment-name">João Cumbane</div>
-          <div class="comment-text">"Melhor produto que já comprei, vejam até o final para entender como funciona"</div>
-          <div class="comment-actions"><span>Responder</span> · <span>Curtir</span> · <span>Seguir</span> · <span>56 min</span></div>
+      <!-- COMENTÁRIOS COM EFEITO AO VIVO (11 itens) -->
+      <div class="comments-live-section">
+        <div class="comments-header">
+          <h3>Comentários <span style="background: #e41e3f; color:white; padding:4px 12px;">11 novos</span></h3>
+          <span>🔵 283 comentários</span>
         </div>
-      </div>
 
-      <!-- Plug-in social Facebook -->
-      <div class="fb-footer-note">
-        <i>f</i> Plug-in social do Facebook · 4 comentários · 17 partilhas
-      </div>
-    </div>
-  </div> <!-- fim container-padding -->
+        <!-- alerta de novo comentário (dinâmico) -->
+        <div class="new-comment-alert" id="newCommentAlert">
+          <span style="background:#1877f2; color:white; border-radius:50%; width:28px; text-align:center;">3</span>
+          <span>3 novos comentários de pessoas que compraram</span>
+        </div>
 
-  <div class="extra-bottom"></div>
+        <!-- lista de 11 comentários com nomes e textos realistas -->
+        <div class="comment-stream" id="commentStream">
+          <!-- 1 -->
+          <div class="comment-item">
+            <div class="comment-avatar avatar-1">L</div>
+            <div class="comment-body">
+              <div class="comment-meta"><span class="comment-author">Leo Macuacua</span><span class="comment-time">há 4 min</span></div>
+              <div class="comment-text">rapaz, eu não passava de 2 minutos… hoje já consigo 35 direto. produto aprovado</div>
+              <div class="comment-actions-live"><span>👍 78</span><span>💬 responder</span><span>🔁 partilhar</span></div>
+            </div>
+          </div>
+          <!-- 2 -->
+          <div class="comment-item">
+            <div class="comment-avatar avatar-2">D</div>
+            <div class="comment-body">
+              <div class="comment-meta"><span class="comment-author">Domingos dos Santos</span><span class="comment-time">há 9 min</span></div>
+              <div class="comment-text">casamento salvo 🙏 minha esposa tá mais feliz. tudo mundo devia comprar</div>
+              <div class="comment-actions-live"><span>❤️ 112</span><span>💬 responder</span></div>
+            </div>
+          </div>
+          <!-- 3 -->
+          <div class="comment-item">
+            <div class="comment-avatar avatar-3">M</div>
+            <div class="comment-body">
+              <div class="comment-meta"><span class="comment-author">Mateus Rosário</span><span class="comment-time">há 17 min</span></div>
+              <div class="comment-text">quem duvida é porque ainda não testou. tô na 2ª semana e é outro nível</div>
+              <div class="comment-actions-live"><span>🔥 203</span><span>💬 responder</span></div>
+            </div>
+          </div>
+          <!-- 4 -->
+          <div class="comment-item">
+            <div class="comment-avatar avatar-4">J</div>
+            <div class="comment-body">
+              <div class="comment-meta"><span class="comment-author">João Cumbane</span><span class="comment-time">há 22 min</span></div>
+              <div class="comment-text">melhor investimento. vejam o vídeo todo, vale a pena</div>
+              <div class="comment-actions-live"><span>👍 44</span><span>💬 responder</span></div>
+            </div>
+          </div>
+          <!-- 5 -->
+          <div class="comment-item">
+            <div class="comment-avatar avatar-5">F</div>
+            <div class="comment-body">
+              <div class="comment-meta"><span class="comment-author">Fernando Machel</span><span class="comment-time">há 28 min</span></div>
+              <div class="comment-text">alguém tem duvida se funciona mesmo? eu tô impressionado</div>
+              <div class="comment-actions-live"><span>👍 32</span><span>💬 5 respostas</span></div>
+            </div>
+          </div>
+          <!-- 6 -->
+          <div class="comment-item">
+            <div class="comment-avatar avatar-6">C</div>
+            <div class="comment-body">
+              <div class="comment-meta"><span class="comment-author">Carlos Mondlane</span><span class="comment-time">há 35 min</span></div>
+              <div class="comment-text">meu amigo indicou, achei que era brincadeira. 40 minutos real?</div>
+              <div class="comment-actions-live"><span>👍 18</span><span>💬 responder</span></div>
+            </div>
+          </div>
+          <!-- 7 -->
+          <div class="comment-item">
+            <div class="comment-avatar avatar-7">A</div>
+            <div class="comment-body">
+              <div class="comment-meta"><span class="comment-author">Armando Nhantumbo</span><span class="comment-time">há 41 min</span></div>
+              <div class="comment-text">Já chegou hoje aqui em Maputo, comecei agora. Feedback em breve</div>
+              <div class="comment-actions-live"><span>👍 27</span><span>💬 responder</span></div>
+            </div>
+          </div>
+          <!-- 8 -->
+          <div class="comment-item">
+            <div class="comment-avatar avatar-8">S</div>
+            <div class="comment-body">
+              <div class="comment-meta"><span class="comment-author">Sérgio Guambe</span><span class="comment-time">há 50 min</span></div>
+              <div class="comment-text">muito melhor que remédio de farmácia. 100% natural 🔥</div>
+              <div class="comment-actions-live"><span>👍 67</span><span>💬 responder</span></div>
+            </div>
+          </div>
+          <!-- 9 -->
+          <div class="comment-item">
+            <div class="comment-avatar avatar-9">E</div>
+            <div class="comment-body">
+              <div class="comment-meta"><span class="comment-author">Edson Uamusse</span><span class="comment-time">há 58 min</span></div>
+              <div class="comment-text">estava céptico, mas depois do depoimento do Léo, fui confiante. entrega rápida</div>
+              <div class="comment-actions-live"><span>👍 41</span><span>💬 responder</span></div>
+            </div>
+          </div>
+          <!-- 10 -->
+          <div class="comment-item">
+            <div class="comment-avatar avatar-10">H</div>
+            <div class="comment-body">
+              <div class="comment-meta"><span class="comment-author">Helder Sitoe</span><span class="comment-time">há 1 h</span></div>
+              <div class="comment-text">alguém sabe se tem desconto pra 2 unidades? meu irmão quer tb</div>
+              <div class="comment-actions-live"><span>👍 22</span><span>💬 2 respostas</span></div>
+            </div>
+          </div>
+          <!-- 11 -->
+          <div class="comment-item">
+            <div class="comment-avatar avatar-11">N</div>
+            <div class="comment-body">
+              <div class="comment-meta"><span class="comment-author">Nelson Mabjaia</span><span class="comment-time">há 1 h</span></div>
+              <div class="comment-text">COMPREI. já chegou, testei ontem: 37 minutos sem parar. tô chocado</div>
+              <div class="comment-actions-live"><span>🔥 312</span><span>💬 responder</span></div>
+            </div>
+          </div>
+        </div>
 
-  <!-- CONFIGURAÇÕES DO CONTADOR E LINK DO BOTÃO -->
+        <!-- rodapé do facebook -->
+        <div class="fb-footer-real">
+          <div class="fb-icon-small">f</div>
+          <span><strong>83 pessoas</strong> comentando · 17 partilhas</span>
+          <span>💬 <u>comentar</u></span>
+        </div>
+      </div> <!-- fim comments live section -->
+    </div> <!-- fim content-card -->
+  </div> <!-- fim fb-mood-bg -->
+
+  <!-- SCRIPT DO CONTADOR (mantém regressivo e link) -->
   <script>
     (function() {
-      // CONTADOR REGRESSIVO (00:09:47)
-      const COUNTDOWN_SECONDS = 587; // 9min47s
-      
-      function formatTime(totalSeconds) {
-        if (totalSeconds < 0) totalSeconds = 0;
-        const hrs = Math.floor(totalSeconds / 3600);
-        const mins = Math.floor((totalSeconds % 3600) / 60);
-        const secs = totalSeconds % 60;
-        return `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+      // tempo 9:47 em segundos
+      const COUNTDOWN = 587; 
+
+      function formatTime(seconds) {
+        if (seconds < 0) seconds = 0;
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
       }
 
-      let targetTime;
-      const savedTarget = localStorage.getItem('urgencyTarget');
+      let target = localStorage.getItem('targetRealTime');
+      const now = Date.now();
 
-      if (savedTarget) {
-        targetTime = parseInt(savedTarget, 10);
-        const now = Date.now();
-        if (isNaN(targetTime) || targetTime < now - 600000) {
-          targetTime = now + COUNTDOWN_SECONDS * 1000;
-          localStorage.setItem('urgencyTarget', targetTime);
-        }
+      if (target) {
+        target = parseInt(target, 10);
+        if (isNaN(target) || target < now - 7200000) target = now + COUNTDOWN * 1000;
       } else {
-        targetTime = Date.now() + COUNTDOWN_SECONDS * 1000;
-        localStorage.setItem('urgencyTarget', targetTime);
+        target = now + COUNTDOWN * 1000;
+      }
+      localStorage.setItem('targetRealTime', target);
+
+      if (now >= target) {
+        target = now + COUNTDOWN * 1000;
+        localStorage.setItem('targetRealTime', target);
       }
 
-      if (Date.now() >= targetTime) {
-        targetTime = Date.now() + COUNTDOWN_SECONDS * 1000;
-        localStorage.setItem('urgencyTarget', targetTime);
+      function refreshTimer() {
+        const diff = Math.max(0, Math.floor((target - Date.now()) / 1000));
+        const span = document.getElementById('countdownTimerReal');
+        if (span) span.innerText = formatTime(diff);
       }
+      refreshTimer();
+      setInterval(refreshTimer, 500);
 
-      function updateCounter() {
-        const now = Date.now();
-        const diffSeconds = Math.max(0, Math.floor((targetTime - now) / 1000));
-        const timerElement = document.getElementById('countdownTimer');
-        if (timerElement) timerElement.innerText = formatTime(diffSeconds);
-      }
-
-      updateCounter();
-      setInterval(updateCounter, 1000);
-
-      // LINK DO BOTÃO "ADERIR JÁ" - ALTERE AQUI
-      const btn = document.getElementById('btnAderir');
+      // Link do botão (exatamente o mesmo)
+      const btn = document.getElementById('btnAderirReal');
       if (btn) {
-        // COLOQUE SEU LINK AQUI (ex: https://seusite.com/checkout)
         btn.setAttribute('href', 'https://fristpays.site/checkout/76b96ff4-aa6b-4f46-850b-4fd3f6d14bfc');
       }
+
+      // Simulador de novos comentários aparecendo (efeito real)
+      let commentCount = 11;
+      setInterval(() => {
+        const alertDiv = document.getElementById('newCommentAlert');
+        if (alertDiv) {
+          const newOnes = Math.floor(Math.random() * 3) + 1;
+          alertDiv.innerHTML = `<span style="background:#1877f2; color:white; border-radius:50%; width:28px; text-align:center;">${newOnes}</span><span>${newOnes} novo comentário de pessoa que comprou</span>`;
+        }
+      }, 17000);
     })();
   </script>
 
-  <!-- Comentário extra no código fonte -->
+  <!-- caractere invisível solicitado (aparece no código fonte) -->
   <!-- � -->
 </body>
 </html>
